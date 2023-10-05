@@ -1,0 +1,11 @@
+##
+# Copy this file to local.tfbackend (which is excluded from Git)
+# and populate as appropriate
+##
+
+# Enter the bucket and table names you assigned as part of the setup (see environments/development/README.md).
+bucket         = "ccs-dev-YOUR_NAME-tf-state"
+dynamodb_table = "ccs-dev-YOUR_NAME-tf-state"
+
+# This value is likely to remain unchanged
+region = "eu-west-2"
