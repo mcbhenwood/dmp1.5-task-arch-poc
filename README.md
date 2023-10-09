@@ -21,3 +21,17 @@ We must therefore arrive at an alternative architecture for the ECS Tasks - This
    ```
 
    If Terraform prompts you for a bucket / table name, you have missed off the `-backend-config=local.tfbackend` argument above.
+
+## Summary of architecture
+
+Two containers: one running Nginx, forwarding requests onto the other container which is running uWSGI in http-socket mode.
+
+There are two types of service: API and Frontend. They differ slightly as follows:
+
+### API
+
+* Nginx: Simple proxy pass of all requests to the appropriate port on the uWSGI container
+
+### Frontend
+
+* Nginx: As for API except that we include static files within the Docker build and serve these directly from the Nginx local file system. (Previously the architecture worked on the basis that both Nginx and uWSGI ran on the same container and so Nginx was able to access the file tree for the WSGI app. In separated containers this will of course no longer be the case).
