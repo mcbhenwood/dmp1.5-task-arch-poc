@@ -7,6 +7,7 @@ module "ecs_cluster" {
     "name" = aws_iam_role.ecs_execution_role.name
   }
   execution_role_policy_docs = {
+    "ecr" : module.ecr_repos.pull_repo_images_policy_document_json,
     "log" : data.aws_iam_policy_document.ecs_execution_log_permissions.json,
     "pass_task_role" : data.aws_iam_policy_document.ecs_execution_pass_task_role_permissions.json
   }

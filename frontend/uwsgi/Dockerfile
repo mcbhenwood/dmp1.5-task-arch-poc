@@ -2,7 +2,8 @@ FROM python:3.9-slim-bookworm
 
 WORKDIR /app
 
-RUN pip3 install --no-cache-dir flask pyuwsgi && \
+RUN apt-get update && apt-get install -y curl && \
+    pip3 install --no-cache-dir flask pyuwsgi && \
     /usr/sbin/groupadd -r uwsgi && /usr/sbin/useradd --no-log-init -r -g uwsgi uwsgi
 
 COPY app /app
